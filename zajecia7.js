@@ -3,7 +3,7 @@ var data;
 const readline = require('readline');
 
 
-  var ludzie = require('./ludzie-4.json');
+  var ludzie = require('./ludzie-3.json');
 // tutaj mamy wczytane dane do tablicy ludzie
 // w takiej strukturze
 //name:"Mieczysław",
@@ -156,6 +156,7 @@ for(let iIter1=0;iIter1<10;iIter1++)
 var bBrakZmian = true; 
 var iIlePrzejsc = 0;
 
+console.log(`rozpoczynam sortowanie bąbelkowe`)
 while (bBrakZmian)
 {
   bBrakZmian=false;
@@ -186,7 +187,7 @@ while (bBrakZmian)
     // zliczamy efektywność algorytmu
     iIlePrzejsc++;
   }
-  if (iIlePrzejsc%1000==0) console.log(`BS iter: ${iIlePrzejsc}`)  ;
+  if (iIlePrzejsc%10000==0) console.log(`BS iter: ${iIlePrzejsc}`)  ;
 }
 // wyświetlamy efektywność sortowania
 console.log(`przejsc sortowania bąbelkowego: ${iIlePrzejsc}`)
@@ -195,6 +196,7 @@ console.log(`przejsc sortowania bąbelkowego: ${iIlePrzejsc}`)
 iIlePrzejsc = 0;
 var iKtoraNajnizsza = 0;
 
+console.log(`rozpoczynam sortowanie przez wybieranie`)
 for (var iIter2=0;iIter2<ludzie.length;iIter2++)
 {
   //ustawiamy początkowe wartości 
@@ -218,7 +220,7 @@ for (var iIter2=0;iIter2<ludzie.length;iIter2++)
   ludzie[iKtoraNajnizsza]=ludzie[iIter2];
   ludzie[iIter2]=oCzlowiek;
   
-  if (iIlePrzejsc%1000==0) console.log(`BS iter: ${iIlePrzejsc}`)  ;
+  if (iIlePrzejsc%1000==0) console.log(`SS iter: ${iIlePrzejsc}`)  ;
   //console.log(`przejscie: ${iIter2}`);
 }
 
