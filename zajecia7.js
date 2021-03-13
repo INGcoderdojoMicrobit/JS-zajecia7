@@ -8,7 +8,7 @@ const readline = require('readline');
   //gender:"Male","Female"
   //hight:166
 
-  var ludzie = require('./ludzie-4.json');
+  var ludzie = require('./ludzie-3.json');
 // tutaj mamy wczytane dane do tablicy ludzie
 var m=0;
 var k=0;
