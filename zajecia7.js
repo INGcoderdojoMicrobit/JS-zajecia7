@@ -174,12 +174,11 @@ while (bBrakZmian)
   }
   
 }
-
+// wyświetlamy efektywność sortowania
 console.log(`przejsc sortowania bąbelkowego: ${iIlePrzejsc}`)
 
-iIlePrzejsc = 0;
 //sortowanie przez wybieranie
-niska_kreska = ludzie[0].hight;
+iIlePrzejsc = 0;
 var iKtoraNajnizsza = 0;
 
 for (var iIter2=0;iIter2<ludzie.length;iIter2++)
@@ -187,17 +186,20 @@ for (var iIter2=0;iIter2<ludzie.length;iIter2++)
   //ustawiamy początkowe wartości 
   niska_kreska = ludzie[iIter2].hight;
   iKtoraNajnizsza = iIter2;  
+
   //wyszukiwanie najmniejszej wartości
   for(iIter1=iIter2;iIter1<ludzie.length;iIter1++){
-    //porównujemy najmniejszą znalezion a do tej pory z aktualną 
+    //porównujemy najmniejszą znalezioną do tej pory z aktualną 
     if (niska_kreska>ludzie[iIter1].hight){
       //znaleziona mniejsza - wstawiamy jako najmnijesza
       niska_kreska=ludzie[iIter1].hight;
-      //zapamiętujemy pozycję
+      //zapamiętujemy pozycję najmniejszej
       iKtoraNajnizsza = iIter1;
     }
+    //efektywność algorytmu
     iIlePrzejsc++;
   }
+  //zamieniamy miejscami najmniejszą i aktualną
   oCzlowiek = ludzie[iKtoraNajnizsza];
   ludzie[iKtoraNajnizsza]=ludzie[iIter2];
   ludzie[iIter2]=oCzlowiek;
@@ -208,11 +210,6 @@ for (var iIter2=0;iIter2<ludzie.length;iIter2++)
 console.log(`przejsc sortowania przez wybieranie: ${iIlePrzejsc}`)
 
 
-console.log(`najniższa osoba: ${niska_kreska}`);
-console.log(`na pozycji: ${iKtoraNajnizsza}`);
-  
-
-
 console.log("PO SORTOWANIU:")
 
 for(let iIter1=0;iIter1<1000;iIter1++)
@@ -221,18 +218,6 @@ for(let iIter1=0;iIter1<1000;iIter1++)
   }
 
 /*
-  console.log(`Ilość mężczyzn: ${m}, ilość kobiet: ${k}`)
-
-  console.log(`najniższa osoba: ${niska_kreska}`)
-  console.log(`najwyższa osoba: ${najwyzsza_kreska}`)
-
-  console.log(`najkrótsze imie: ${najkr_imie} - ${sNajk_imie}`)
-  console.log(`najdłuższe imie: ${najdl_imie} - ${sNajd_imie}`)
-
-  console.log(`najdłuższe nazwisko: ${iNajdl_nazw} - ${sNajd_nazw}`)
-
-  console.log(`imion jest ${tabImiona.length}`);
-
   tabImiona.forEach(element =>{
   //  console.log(element);
   });
