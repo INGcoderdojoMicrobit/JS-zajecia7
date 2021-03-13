@@ -2,14 +2,17 @@ var fs=require('fs');
 var data;
 const readline = require('readline');
 
-  //name:"Mieczysław",
+
+  var ludzie = require('./ludzie-3.json');
+// tutaj mamy wczytane dane do tablicy ludzie
+// w takiej strukturze
+//name:"Mieczysław",
   //surename:"Nowicki",
   //age:94,
   //gender:"Male","Female"
   //hight:166
 
-  var ludzie = require('./ludzie-3.json');
-// tutaj mamy wczytane dane do tablicy ludzie
+
 var m=0;
 var k=0;
 var niska_kreska;
@@ -23,6 +26,9 @@ var iNajdl_nazw;
 
 var tabImiona = [];
 
+// UWAGA! nowe zmienne nazywamy według konwencji:
+// pierwsza litera oznacza typ - z tych poniżej:
+// ----------------------
 // integer - całkowita
 // string - tekst
 // long - całkowita
@@ -33,7 +39,12 @@ var tabImiona = [];
 // object - obiekt
 // listy
 // tablice
-  
+//--------------------
+// reszta z dużej litery oznacza nazwę zmiennej - opisową
+// np: iIterator - zmienna typu int, iterator w pętli
+
+
+// tutaj zakładamy, że lista nie jest pusta - inaczej nie będzie miała obiektu na pozycji [0]
   niska_kreska = ludzie[0].hight;
   najwyzsza_kreska = ludzie[0].hight;
 
@@ -44,16 +55,21 @@ var tabImiona = [];
   sNajd_nazw = ludzie[0].surename;
   iNajdl_nazw = ludzie[0].surename.length;
   //console.log(ludzie);
+
+  //lecimy po całej tablicy i wyszukujemy potrzebne informacje
   ludzie.forEach(element => {
-    if (element.gender == "Male") m++;
-    else if (element.gender == "Female") k++;
+    if (element.gender == "Male") m++; //zliczamy facetów
+    else if (element.gender == "Female") k++; //zliczamy kobiry
     else console.error("nierozpoznana płec");
    
+    //jeśli znejdziemy niższą osobę niż nasza "tymczasowa"
     if (niska_kreska > element.hight)
     {
+      // to wpisujemy niższą jako "tymczasowo najniższą" - malujemy na tablicy kredą niższą kreskę
       niska_kreska = element.hight;
     }
 
+    //podobnie z najwyższą osobą
     if (najwyzsza_kreska < element.hight) {najwyzsza_kreska = element.hight;}
 
     //najdłuższe/najkrótsze imie
@@ -114,6 +130,7 @@ var tabImiona = [];
 
 
 
+// wyświetlamy pierwsze 10 osób wg wzrostu
 console.log(`wzrost (pierwsze 10)`);
 for(let iIter1=0;iIter1<10;iIter1++)
   {
@@ -134,10 +151,17 @@ while (bBrakZmian)
     //console.log(ludzie[iIter1].hight);
     
     var oCzlowiek;
-    //porównujemy obecny z kolejnym - czy imię jest "mniejsze" alfabetycznie
-    // a = 61
-    // b = 62
-    // ą = 267
+    // tutaj jest główne porównanie sortowania - może być według:
+    // imion alfabetycznie - if (ludzie[iIter1].name>ludzie[iIter1+1].name){
+    // wzrostu - if (ludzie[iIter1].hight>ludzie[iIter1+1].hight){
+    // wieku - if (ludzie[iIter1].age>ludzie[iIter1+1].age){
+    // albo nazwiska - alfabetycznie
+    // uwaga - porównanie stringów nmie działa na polskich znaczkach - źle sortuje
+    // bo w znakach ASCII często literki "polskie" są dużo dalej niż literki angielskie
+    // a = 97
+    // b = 98
+    // ą = 177
+    // aby sortowało poprawnie - trzba napisać własną funkcję porównującą
     if (ludzie[iIter1].surename>ludzie[iIter1+1].surename){
       // zamieniamy miejscami dwa obiekty w tablicy ludzie
       oCzlowiek = ludzie[iIter1];
@@ -145,6 +169,7 @@ while (bBrakZmian)
       ludzie[iIter1+1]=oCzlowiek;
       bBrakZmian = true;
     }
+    // zliczamy efektywność algorytmu
     iIlePrzejsc++;
   }
   
