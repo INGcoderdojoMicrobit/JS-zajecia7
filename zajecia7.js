@@ -135,9 +135,10 @@ var tabImiona = [];
 //
 //
 // zabawy z sortowaniem
-//
-//
-//
+// 
+// TODO:
+// 1. sortowanie z polskimi znakami
+// 2. sortowanie po kilku kryteriach - nazwisko, potem imię
 //
 //
 ////////////////////////////////////////////////////////////////////////////////////
