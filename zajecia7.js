@@ -3,7 +3,7 @@ var data;
 const readline = require('readline');
 
 
-  var ludzie = require('./ludzie-3.json');
+  var ludzie = require('./ludzie-4.json');
 // tutaj mamy wczytane dane do tablicy ludzie
 // w takiej strukturze
 //name:"Mieczysław",
@@ -128,6 +128,20 @@ var tabImiona = [];
 
   console.log(`imion jest ${tabImiona.length}`);
 
+////////////////////////////////////////////////////////////////////////////////////
+//
+//
+//
+//
+//
+// zabawy z sortowaniem
+//
+//
+//
+//
+//
+////////////////////////////////////////////////////////////////////////////////////
+
 
 
 // wyświetlamy pierwsze 10 osób wg wzrostu
@@ -172,7 +186,7 @@ while (bBrakZmian)
     // zliczamy efektywność algorytmu
     iIlePrzejsc++;
   }
-  
+  if (iIlePrzejsc%1000==0) console.log(`BS iter: ${iIlePrzejsc}`)  ;
 }
 // wyświetlamy efektywność sortowania
 console.log(`przejsc sortowania bąbelkowego: ${iIlePrzejsc}`)
@@ -204,6 +218,7 @@ for (var iIter2=0;iIter2<ludzie.length;iIter2++)
   ludzie[iKtoraNajnizsza]=ludzie[iIter2];
   ludzie[iIter2]=oCzlowiek;
   
+  if (iIlePrzejsc%1000==0) console.log(`BS iter: ${iIlePrzejsc}`)  ;
   //console.log(`przejscie: ${iIter2}`);
 }
 
