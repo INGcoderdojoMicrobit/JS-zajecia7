@@ -1,5 +1,6 @@
 var fs=require('fs');
 var data;
+var rl2;
 const readline = require('readline');
 
 
@@ -253,22 +254,65 @@ function SelectionSort(){
 
 
 
+function WczytajWyrazyZPliku(){
+  console.log('czytamy z pliku');
+  line_no=0;
+      
+  rl2 = readline.createInterface({
+      input: fs.createReadStream('./slowa_en.txt'),
+      output: process.stdout,
+      terminal: false
+  });
+  
+  rl2.on('line', (line) => {
+      if (line.length>0)
+      {
+        var user = new Object();            
+        user.wyraz=line;
+        wyrazy.push(user);
+      }
+      line_no++;
+  });  
+
+  rl2.on('close', function(line) {
+    console.log('Total lines : ' + line_no);
+    console.log('przeczytane :' + wyrazy.length);
+    SelectionSortWyraz();
+  });
+
+
+}
+
 function SelectionSortWyraz(){
+  var wyrazy;
+  wyrazy = require('./wyrazy-4-en.json');
+   
   //sortowanie przez wybieranie
   iIlePrzejsc = 0;
   var iKtoraNajnizsza = 0;
 
+  console.log("PRZED:")
+  for(let iIter1=9998;iIter1<10001;iIter1++)
+    {
+      //if(wyrazy[iIter1].wyraz=="") console.log("pusta");
+      console.log(wyrazy[iIter1].wyraz)    
+    }
+
+
+
+
+
   console.log(`rozpoczynam sortowanie przez wybieranie`)
-  //for (var iIter2=0;iIter2<wyrazy.length;iIter2++)
-  for (var iIter2=0;iIter2<10000;iIter2++)
+  for (var iIter2=0;iIter2<wyrazy.length;iIter2++)
+  //for (var iIter2=0;iIter2<10000;iIter2++)
   {
     //ustawiamy początkowe wartości 
     niska_kreska = wyrazy[iIter2].wyraz;
     iKtoraNajnizsza = iIter2;  
 
     //wyszukiwanie najmniejszej wartości
-    //for(iIter1=iIter2;iIter1<wyrazy.length;iIter1++){
-      for(iIter1=iIter2;iIter1<10000;iIter1++){
+    for(var iIter1=iIter2;iIter1<wyrazy.length;iIter1++){
+    //  for(iIter1=iIter2;iIter1<10000;iIter1++){
       //porównujemy najmniejszą znalezioną do tej pory z aktualną 
       if (niska_kreska>wyrazy[iIter1].wyraz){
         //znaleziona mniejsza - wstawiamy jako najmnijesza
@@ -278,13 +322,14 @@ function SelectionSortWyraz(){
       }
       //efektywność algorytmu
       iIlePrzejsc++;
+      //if (iIter2>9999 && iIter1==36165) console.log(`SS iter: ${iIter2} oraz ${iIter1} wyraz+1: ${wyrazy[iIter1].wyraz} i wyraz+1: ${wyrazy[iIter1+1]} wyraz+1: ${wyrazy[iIter1+2].wyraz}`)  ;
     }
     //zamieniamy miejscami najmniejszą i aktualną
     oCzlowiek = wyrazy[iKtoraNajnizsza];
-    wyrazy[iKtoraNajnizsza]=ludzie[iIter2];
+    //if (oCzlowiek.wyraz=="") console.log("pusty "+oCzlowiek)
+    wyrazy[iKtoraNajnizsza]=wyrazy[iIter2];
     wyrazy[iIter2]=oCzlowiek;
-    
-    if (iIlePrzejsc%1000==0) console.log(`SS iter: ${iIlePrzejsc}`)  ;
+    if (iIter2%1000==0) console.log(`SS iter: ${iIter2}`)  ;
     //console.log(`przejscie: ${iIter2}`);
   }
 
@@ -292,10 +337,9 @@ function SelectionSortWyraz(){
 
 
   console.log("PO SORTOWANIU:")
-
   for(let iIter1=0;iIter1<1000;iIter1++)
     {
-      console.log(`wyraz:${wyrazy[iIter1].wyraz}`);
+      console.log(`wyraz: ${wyrazy[iIter1].wyraz}`);
     }
 
 }
@@ -305,7 +349,8 @@ function SelectionSortWyraz(){
 function WyrazoweZabawy()
 {
 
-  var wyrazy = require('./wyrazy-1.json');
+  var wyrazy = require('./wyrazy-2.json');
+  //var wyrazy = require('./wyrazy-3-en.json');
   // wyświetlamy pierwsze 10wyrazów
   //console.log(`wyrazy (pierwsze 10)`);
   var tab = [];
@@ -344,10 +389,12 @@ function Palindromek(wejWyraz){
 }
 
 //ZliczajStatystyki();
-WyrazoweZabawy();
+//WyrazoweZabawy();
 //BubbleSort();
 //SelectionSort();
-//SelectionSortWyraz();
+//var wyrazy=[];
+//WczytajWyrazyZPliku();
+SelectionSortWyraz();
 //Palindromek("ADAREMERADA");
 //if (Palindromek("alamakotaisiegonieboia")){
 //  console.log(`jestem palindromem!!!!: ${wejWyraz}`);
@@ -368,4 +415,3 @@ WyrazoweZabawy();
 // GrabaraMaksymilian
 // GrabaraAdam
 // GrabaraAnna
-
