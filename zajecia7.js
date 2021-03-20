@@ -6,7 +6,7 @@ const readline = require('readline');
   var ludzie = require('./ludzie-3.json');
 // tutaj mamy wczytane dane do tablicy ludzie
 // w takiej strukturze
-//name:"Mieczysław",
+  //name:"Mieczysław",
   //surename:"Nowicki",
   //age:94,
   //gender:"Male","Female"
@@ -183,7 +183,8 @@ function BubbleSort(){
       // b = 98
       // ą = 177
       // aby sortowało poprawnie - trzba napisać własną funkcję porównującą
-      if (ludzie[iIter1].surename>ludzie[iIter1+1].surename){
+      //if (ludzie[iIter1].surename>ludzie[iIter1+1].surename){
+      if (ludzie[iIter1].surename+ludzie[iIter1].name>ludzie[iIter1+1].surename+ludzie[iIter1+1].name){
         // zamieniamy miejscami dwa obiekty w tablicy ludzie
         oCzlowiek = ludzie[iIter1];
         ludzie[iIter1]=ludzie[iIter1+1];
@@ -197,6 +198,11 @@ function BubbleSort(){
   }
   // wyświetlamy efektywność sortowania
   console.log(`przejsc sortowania bąbelkowego: ${iIlePrzejsc}`)
+  for(let iIter1=0;iIter1<1000;iIter1++)
+  {
+    console.log(`nazwisko:${ludzie[iIter1].surename} imie: ${ludzie[iIter1].name}`);
+  }
+
 }
 
 
@@ -240,16 +246,113 @@ function SelectionSort(){
 
   for(let iIter1=0;iIter1<1000;iIter1++)
     {
-      console.log(ludzie[iIter1].hight);
+      console.log(`nazwisko:${ludzie[iIter1].surename} imie: ${ludzie[iIter1].name}`);
     }
 
 }
 
 
 
-ZliczajStatystyki();
-BubbleSort();
-SelectionSort();
+function SelectionSortWyraz(){
+  //sortowanie przez wybieranie
+  iIlePrzejsc = 0;
+  var iKtoraNajnizsza = 0;
+
+  console.log(`rozpoczynam sortowanie przez wybieranie`)
+  //for (var iIter2=0;iIter2<wyrazy.length;iIter2++)
+  for (var iIter2=0;iIter2<10000;iIter2++)
+  {
+    //ustawiamy początkowe wartości 
+    niska_kreska = wyrazy[iIter2].wyraz;
+    iKtoraNajnizsza = iIter2;  
+
+    //wyszukiwanie najmniejszej wartości
+    //for(iIter1=iIter2;iIter1<wyrazy.length;iIter1++){
+      for(iIter1=iIter2;iIter1<10000;iIter1++){
+      //porównujemy najmniejszą znalezioną do tej pory z aktualną 
+      if (niska_kreska>wyrazy[iIter1].wyraz){
+        //znaleziona mniejsza - wstawiamy jako najmnijesza
+        niska_kreska=wyrazy[iIter1].wyraz;
+        //zapamiętujemy pozycję najmniejszej
+        iKtoraNajnizsza = iIter1;
+      }
+      //efektywność algorytmu
+      iIlePrzejsc++;
+    }
+    //zamieniamy miejscami najmniejszą i aktualną
+    oCzlowiek = wyrazy[iKtoraNajnizsza];
+    wyrazy[iKtoraNajnizsza]=ludzie[iIter2];
+    wyrazy[iIter2]=oCzlowiek;
+    
+    if (iIlePrzejsc%1000==0) console.log(`SS iter: ${iIlePrzejsc}`)  ;
+    //console.log(`przejscie: ${iIter2}`);
+  }
+
+  console.log(`przejsc sortowania przez wybieranie: ${iIlePrzejsc}`)
+
+
+  console.log("PO SORTOWANIU:")
+
+  for(let iIter1=0;iIter1<1000;iIter1++)
+    {
+      console.log(`wyraz:${wyrazy[iIter1].wyraz}`);
+    }
+
+}
+
+
+
+function WyrazoweZabawy()
+{
+
+  var wyrazy = require('./wyrazy-1.json');
+  // wyświetlamy pierwsze 10wyrazów
+  //console.log(`wyrazy (pierwsze 10)`);
+  var tab = [];
+  for(let iIter1=0;iIter1<wyrazy.length - 1;iIter1++)
+    /*{
+      console.log(`${wyrazy[iIter1].wyraz} palindrom: ${Palindromek(wyrazy[iIter1].wyraz) ? "tak" : "nie"}`);
+    }*/
+    {
+      if (Palindromek(wyrazy[iIter1].wyraz)) {
+        console.log(wyrazy[iIter1].wyraz);
+        tab.push(wyrazy[iIter1].wyraz)
+      }
+      //if (iIter1%10000==0) console.log(iIter1)
+    }
+
+  console.log(`wyrazow jest ${wyrazy.length}`);
+  console.log(tab);
+}
+
+
+function Palindromek(wejWyraz){
+  //sprawdzanie czy jest palindromem
+  //console.log(`wyraz: ${wejWyraz}`);
+  var bJestPalindromem = true;
+  for(let iIter3 = 0;iIter3<Math.floor(wejWyraz.length/2);iIter3++)
+  {
+    //console.log(`literka: ${iIter3}, ${wejWyraz[iIter3]}, od konca: ${wejWyraz.length-iIter3-1}, ${wejWyraz[wejWyraz.length-iIter3-1]}`);
+    if(wejWyraz[iIter3]!=wejWyraz[wejWyraz.length-iIter3-1])
+    {
+      bJestPalindromem = false;
+      //console.log(`sorki - nie jestem palindromem: ${wejWyraz}`);
+      break; // nie jestem przerywam
+    }
+  }
+  return bJestPalindromem;
+}
+
+//ZliczajStatystyki();
+WyrazoweZabawy();
+//BubbleSort();
+//SelectionSort();
+//SelectionSortWyraz();
+//Palindromek("ADAREMERADA");
+//if (Palindromek("alamakotaisiegonieboia")){
+//  console.log(`jestem palindromem!!!!: ${wejWyraz}`);
+//}
+
 
 /*
   tabImiona.forEach(element =>{
@@ -258,6 +361,11 @@ SelectionSort();
   //coś tam
   // a tu moje coś tam
   //edit
-
+// sus
   
 */
+
+// GrabaraMaksymilian
+// GrabaraAdam
+// GrabaraAnna
+
