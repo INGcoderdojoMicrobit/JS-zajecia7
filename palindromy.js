@@ -1,4 +1,4 @@
-var wyrazy = require("./wyrazy-1.json");
+var wyrazy = require("./wyrazy-2.json");
 
 var tab = []; //W tej tablicy zapisujemy wszystkie palindromy
 
