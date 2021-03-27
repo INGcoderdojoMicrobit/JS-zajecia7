@@ -9,12 +9,16 @@
 tu coś trzeba napisać, bo każdy dobry lib ma dokumentację
 */
 //MaksG
-//var wyrazy = require("./wyrazy-2.json");
 
-// nasza lokalna tablica
+
+// tab - tablica wejściowa - według niej rysujemy histogram
 // iNormalizuj = 0 -> nic nie rób z danymi 
-//             = 1 -> normalizuj względem największej
-//             = 2 -> policz względem sumy
+//             = 1 -> normalizuj względem największej wartości - jako 100%
+//             = 2 -> policz względem sumy do 100%
+//iOptionalMaxValue - wartość maksymalna względem rysowania wykresu
+//             -> dla iNormalizuj = 0 optymalnie wybrać największą wartość
+//             -> dla iNormalizuj = 1 optymalnie wybrać 100 - lub nic
+//             -> dla iNormalizuj = 2 optymalnie wybrać największą wartość % - np. 10 
 
 module.exports = {
   RysujHistogram: function(tab, bOpis, iNormalizuj, iOptionalMaxValue = 100) {
@@ -90,13 +94,13 @@ module.exports = {
   }
 }
 
-
+// funkcja dodaje spacje na początku liczby
 function spacePad(num, places) {
   var zero = places - num.toString().length + 1;
   return Array(+(zero > 0 && zero)).join(" ") + num;
 }
 
-
+// funkcja dodaje spacje na końcu liczby 
 function spacePadEnd(num, places) {
   var zero = places - num.toString().length + 1;
   return num + Array(+(zero > 0 && zero)).join(" ");
