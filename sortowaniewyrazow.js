@@ -40,6 +40,7 @@ function WczytajWyrazyZPliku(){
 function SelectionSortWyraz(){
   var wyrazy=[];
   wyrazy = require('./wyrazy-4-en.json');
+  //wyrazy = require('./wyrazy-2.json');
    
   //sortowanie przez wybieranie
   iIlePrzejsc = 0;
