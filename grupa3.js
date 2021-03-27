@@ -1,4 +1,6 @@
+//Michał
 var wyrazy = require("./wyrazy-2.json");
+
 
 var tab = []; //W tej tablicy zapisujemy wszystkie wyniki
 let iPozycja = 0;

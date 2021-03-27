@@ -1,31 +1,43 @@
 //Michalina
 
 var wyrazy = require("./wyrazy-2.json");
+//var wyrazy = require("./wyrazy-4-en.json");
 
-var tab = []; //W tej tablicy zapisujemy wszystkie wyniki
+var tabelka = []; //W tej tablicy zapisujemy wszystkie wyniki
 let iPozycja = 0;
-
-//inicjowanie tablicy wyników
-for (let iIter1 = 0; iIter1 < 20; iIter1++) {
-  tab[iIter1] = 0;
-};
-
-for (let iIter1 = 0; iIter1 < wyrazy.length - 1; iIter1++) {
-    //console.log(`${wyrazy[iIter1].wyraz} ala ma kota: ${FunkcjaMoja(wyrazy[iIter1].wyraz) ? "tak" : "nie"}`);
-    iPozycja = dlugoscwyrazu(wyrazy[iIter1].wyraz);
-  if (iPozycja<100) {
-    //console.log(wyrazy[iIter1].wyraz);
-    tab[iPozycja]++;
-  }
-  //if (iIter1%10000==0) console.log(iIter1) //Wyświetl co 10 000 przejścia, na którym słowie jesteśmy
-}
-
-console.log(`wyrazow jest ${wyrazy.length}`);
-console.log(tab);
 
 function dlugoscwyrazu(wejWyraz) {
   //sprawdzanie - zwracam długość wyrazu
   //console.log(`wyraz: ${wejWyraz}`);
   return wejWyraz.length;
 }
- 
+
+//inicjowanie tablicy wyników -> na razie zakłądamy, że nie będzie wyrazów dłuższych niż 40 literek
+for (let iIter1 = 0; iIter1 < 40; iIter1++) {
+  tabelka[iIter1] = 0;
+};
+
+for (let iIter1 = 0; iIter1 < wyrazy.length - 1; iIter1++) {
+    iPozycja = dlugoscwyrazu(wyrazy[iIter1].wyraz);
+  if (iPozycja<100) {
+    tabelka[iPozycja]++;
+  }
+}
+
+console.log(`wyrazow jest ${wyrazy.length}`);
+console.log(tabelka);
+
+//wyświeltamy - parametry funkcji:
+// tabelka -> tablica z wynikami
+// false -> opis pod histogramem z CYFEREK, true -> opis z LITEREK
+// włączamy funkcję ryzującą harmonogram
+var api2 = require('./histogram');
+
+console.log(`rozkład względem 450000`);
+api2.RysujHistogram(tabelka, false, 0, 450000)
+console.log(``);
+console.log(`rozkład względem największej liczby`);
+api2.RysujHistogram(tabelka, false, 1)
+console.log(``);
+console.log(`rozkład względem sumy wszystkich do 100%`);
+api2.RysujHistogram(tabelka, false, 2, 20)
