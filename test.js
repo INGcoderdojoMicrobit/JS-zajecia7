@@ -17,3 +17,4 @@ api2.RysujHistogram(tablica, true, 1)
 api2.RysujHistogram(tablica, true, 2,10)
 
 //console.log(api.englishAlphabetArray(arr2));
+
