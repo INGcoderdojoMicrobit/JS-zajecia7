@@ -41,7 +41,7 @@ for (let iIter1 = 0; iIter1 < wyrazy.length - 1; iIter1++) {
       }
     }
 
-    //jak nie wyło takiej ulicy w tablicy tab[]
+    //jak nie było takiej ulicy w tablicy tab[]
     if (!bFound)
     {
       var ulica = new Object(); //tworzymy nowy obiekt - ulica

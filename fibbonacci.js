@@ -20,6 +20,6 @@ function fib(num){
     return iSum;
   };
 
-let iKtory = 3;
+let iKtory = 5;
 console.log(`${iKtory} wyraz ciągu Fibbonacciego = ${fib(iKtory)}, wyliczenie zajęło ${iIle} wywołań funkcji fib()`)
 

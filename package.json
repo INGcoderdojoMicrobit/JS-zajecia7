@@ -5,5 +5,8 @@
   "repository": "https://github.com/INGcoderdojoMicrobit/JS-zajecia7.git",
   "author": "Coderdojo ING",
   "license": "UNLICENSED",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "request": "^2.88.2"
+  }
 }
