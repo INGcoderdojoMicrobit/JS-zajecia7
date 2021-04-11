@@ -256,6 +256,17 @@ function BoredAPI(iIleOsob){
 }
 
 
+function PublicAPI(){
+    //https://api.publicapis.org/entries
+    request(`https://api.publicapis.org/entries`, { json: true }, (err, res, body) => {
+            if (err) { return console.log(err); }
+            body.entries.forEach(element => {
+                if (Math.random()*100<2) console.log(`publicapis-> API:${element.API}, opis:${element.Description}, link:${element.Link}`);    
+            });
+        });
+}
+
+
 
 
 function sleep(ms) {
@@ -288,3 +299,4 @@ BooksISBNAPI("9788366573536")
 IPinfoAPI("91.201.120.214");
 ZippoAPI("40-748","pl")
 BoredAPI(1)
+PublicAPI()
