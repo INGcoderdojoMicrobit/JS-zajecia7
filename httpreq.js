@@ -263,6 +263,9 @@ function sleep(ms) {
   }
     
 
+
+  //lista api -> https://api.publicapis.org/entries
+
 //AccuWeatherLocations("pl") //Polska
 //AccuWeatherCitySearch("Katowice",24) //24 - śląskie
 
