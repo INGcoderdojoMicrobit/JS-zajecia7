@@ -287,7 +287,7 @@ OpenWeatherMap("Katowice")
 
 OpenWeatherMap("Szczecin")
 
-GoogleTranslate("get your ass here and stop fighiting me", "auto", "pl")
+GoogleTranslate("dragonfly is creeping into the wild forest", "auto", "pl")
 
 NasaAPI();
 ThingSpeakAPI();
