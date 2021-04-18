@@ -12,9 +12,9 @@ let sWynik=""
 function OpenWeatherMap(sCity){
 
     request(`https://api.openweathermap.org/data/2.5/weather?q=${sCity}&appid=${OWMAPPID}&lang=pl&units=metric`, (err, res, body) => {
-        console.log(body);
+        //console.log(body);
         let oPogoda = JSON.parse(body);
-        console.log(oPogoda);
+        //console.log(oPogoda);
 
         console.log("openweather-> "+sCity);
         console.log(`openweather-> temperatura: ${oPogoda.main.temp}°C, temperatura odczuwalna: ${oPogoda.main.feels_like}°C, temp min: ${oPogoda.main.temp_min}°C, temp max: ${oPogoda.main.temp_max}°C`);
@@ -26,11 +26,12 @@ function OpenWeatherMap(sCity){
 OpenWeatherMap('Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch')
 
 OpenWeatherMap('Amorgos')
-//https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 OpenWeatherMap("Katowice")
 
 OpenWeatherMap("Szczecin")
+
+
 
 
 

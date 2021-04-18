@@ -30,29 +30,19 @@ function DifferentDogdFactsAPI(){
     //https://dog-facts-api.herokuapp.com/api/v1/resources/dogs/all
 
     request(`https://dog-facts-api.herokuapp.com/api/v1/resources/dogs/all`, (err, res, body) => {
-        //console.log(body);
         let oFakty = JSON.parse(body);
-        //console.log(oFakty.length);
         oFakty.forEach(element => {
             console.log(`dog-facts->: ${element.fact}`);  
         });
-
 });
 }
 
 function BoredAPI(){
-            //https://dog-facts-api.herokuapp.com/api/v1/resources/dogs/all
         
             request(`https://www.boredapi.com/api/activity?participants=1`, (err, res, body) => {
-                //console.log(body);
-                let oCorobic = JSON.parse(body);
-                console.log(oCorobic.activity);
                 
-        //console.log("openweather-> "+sCity);
-        //console.log(`openweather-> temperatura: ${oPogoda.main.temp}°C, temperatura odczuwalna: ${oPogoda.main.feels_like}°C, temp min: ${oPogoda.main.temp_min}°C, temp max: ${oPogoda.main.temp_max}°C`);
-        //console.log(`openweather-> ciśnienie: ${oPogoda.main.pressure}hPa, wilgotność: ${oPogoda.main.humidity}`);
-        //console.log(`openweather-> widoczność: ${oPogoda.visibility}m`);
-        //console.log(`openweather-> http://openweathermap.org/img/w/${oPogoda.weather[0].icon}.png`)
+                let oCorobic = JSON.parse(body);
+                console.log(`BoredAPI->: ${oCorobic.activity}`);
     });
 }
 
@@ -81,7 +71,7 @@ function CosTamAPI(){
 //OpenWeatherMap("Szczecin")
 
 
-//DifferentDogdFactsAPI();
+DifferentDogdFactsAPI();
 BoredAPI()
 
 // https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${cityID}?apikey=${accuAPIID}&language=pl&metric=true

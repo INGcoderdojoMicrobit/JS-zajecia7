@@ -33,11 +33,7 @@ function Amogus(sKraj, sKodPoczt){
         let oKodPoczt = JSON.parse(body);
         //console.log(oKodPoczt);
 
-        //console.log("openweather-> "+sCity);
-        console.log(`zippotamus-> Kod=${sKodPoczt}  Miasto: ${oKodPoczt.places[0]["place name"]}`);
-        //console.log(`openweather-> ciśnienie: ${oPogoda.main.pressure}hPa, wilgotność: ${oPogoda.main.humidity}`);
-        //console.log(`openweather-> widoczność: ${oPogoda.visibility}m`);
-        //console.log(`openweather-> http://openweathermap.org/img/w/${oPogoda.weather[0].icon}.png`)
+        console.log(`zippotamus-> Kraj: ${oKodPoczt.country}, Kod=${sKodPoczt}  Miasto: ${oKodPoczt.places[0]["place name"]}`);
     });
 }
 
@@ -45,6 +41,29 @@ Amogus("pl","41-700")
 Amogus("pl","80-690")
 Amogus("pl","41-506")
 Amogus("pl","00-111")
+Amogus("us","60174")
+Amogus("de","80809")
+Amogus("nl","1012")
+Amogus("cz","543 51")
+Amogus("at","5630")
+Amogus("at","7111")
+Amogus("sk","031 01")
+Amogus("sk","059 85")
+Amogus("it","38066")
+Amogus("it","37019")
+Amogus("it","30124")
+Amogus("it","57027")
+Amogus("it","00120")
+Amogus("es","08019")
+Amogus("es","28013")
+Amogus("is","101")
+Amogus("is","240")
+Amogus("is","801")
+Amogus("se","11157")
+
+
+
+
 
 //OpenWeatherMap('Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch')
 
