@@ -4,13 +4,8 @@ var app = express();
 const path = require('path');
 const router = express.Router();
 
-
-
-router.get("/url", (req, res, next) => {
-    res.json(["Tony","Lisa","Michael","Ginger","Food","Anna","Dala"]);
-   });
-
-router.get('/',function(req,res){
+function reportdate()
+{
   let date_ob = new Date();
 
   // current date
@@ -32,7 +27,61 @@ router.get('/',function(req,res){
   // current seconds
   let seconds = date_ob.getSeconds();
 
-  console.log(`get/ -> wysyłam plik index.html ${year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds}`) 
+  return `${year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds}`; 
+
+}
+
+
+
+function liczdlugosci()
+{
+
+  var wyrazy = require("./wyrazy-2.json");
+  //var wyrazy = require("./wyrazy-4-en.json");
+
+  var tabelka = []; //W tej tablicy zapisujemy wszystkie wyniki
+  let iPozycja = 0;
+
+  function dlugoscwyrazu(wejWyraz) {
+    //sprawdzanie - zwracam długość wyrazu
+    //console.log(`wyraz: ${wejWyraz}`);
+    return wejWyraz.length;
+  }
+
+  //inicjowanie tablicy wyników -> na razie zakłądamy, że nie będzie wyrazów dłuższych niż 40 literek
+  for (let iIter1 = 0; iIter1 < 40; iIter1++) {
+    zawartosc = new Object()
+    zawartosc.numer = iIter1;
+    zawartosc.dlugosc = 0;
+    tabelka.push(zawartosc);
+  };
+
+  for (let iIter1 = 0; iIter1 < wyrazy.length - 1; iIter1++) {
+      iPozycja = dlugoscwyrazu(wyrazy[iIter1].wyraz);
+    if (iPozycja<100) {
+      tabelka[iPozycja].dlugosc++;
+    }
+  }
+
+  console.log(`wyrazow jest ${wyrazy.length}`);
+  return JSON.stringify(tabelka);
+}
+
+router.get("/url", (req, res, next) => {
+    res.json(["Tony","Lisa","Michael","Ginger","Food","Anna","Maksio"]);
+   });
+
+router.get("/url2", (req, res, next) => {
+    
+    res.json(liczdlugosci());
+
+   });
+
+
+
+
+router.get('/',function(req,res){
+  console.log(`get/ -> wysyłam plik index.html ${reportdate()}`) 
   res.sendFile(path.join(__dirname+'/index.html'));
   //__dirname : It will resolve to your project folder.
 });

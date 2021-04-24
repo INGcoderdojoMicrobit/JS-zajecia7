@@ -7,6 +7,7 @@ const request = require('request');
 let OWMAPPID = "dea49c5dbe5ecf2f3b3d6ed074766ee2"
 let accuAPIID = "MOVo4OIH5KgNohU1JXHgHI2J7pMHB3Io"
 let NASAAPPID = "Nzei0jlJaiJzcmlX5vxdCRB3TOMBFEazgudEUn32"
+let LOCALAPID = "wfteuy92gf92bf32f3yo7gb2gb67q2ov7q2ntcf4fg27q3cnvfewuyf4cg68obf2nyvby72ncv7tq23fcnv76yraefruyal32uyg"
 let sWynik=""
 //Amogus
 function OpenWeatherMap(sCity){
@@ -71,8 +72,18 @@ function openlibraryAuthor(sAuthor){
 }
 
 
+function localdate(gmt){
+    //{"ok":true,"dayOfWeek":6,"month":4,"year":2021,"day":24}
+    request(`http://localhost:3000/date?key=${LOCALAPID}&gmt=${gmt}`, (err, res, body) => {
+        let oDate = JSON.parse(body);
+        console.log(`localdateAPI-> miesiąc: ${oDate.month}, rok: ${oDate.year}, dzień: ${oDate.day}`)
+    });
+}
 
-openlibraryISBN("9788324403875")
+
+
+localdate(2)
+//openlibraryISBN("9788324403875")
 //RestCountriesAPI("Germany")
 
 ///OpenWeatherMap('Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch')

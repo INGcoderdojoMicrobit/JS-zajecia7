@@ -11,12 +11,12 @@ let sWynik=""
 //Amogus
 function OpenWeatherMap(sCity){
 
-    request(`https://api.openweathermap.org/data/2.5/weather?q=${sCity}&appid=${OWMAPPID}&lang=pl&units=metric`, (err, res, body) => {
+    request(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(sCity)}&appid=${OWMAPPID}&lang=pl&units=metric`, (err, res, body) => {
         console.log(body);
         let oPogoda = JSON.parse(body);
         console.log(oPogoda);
 
-        console.log("openweather-> "+sCity);
+        console.log(`openweather-> ${sCity}, zakodowany URL = ${encodeURI(sCity)}`);
         console.log(`openweather-> temperatura: ${oPogoda.main.temp}°C, temperatura odczuwalna: ${oPogoda.main.feels_like}°C, temp min: ${oPogoda.main.temp_min}°C, temp max: ${oPogoda.main.temp_max}°C`);
         console.log(`openweather-> ciśnienie: ${oPogoda.main.pressure}hPa, wilgotność: ${oPogoda.main.humidity}`);
         console.log(`openweather-> widoczność: ${oPogoda.visibility}m`);
@@ -46,6 +46,19 @@ function BoredAPI(){
     });
 }
 
+//https://restcountries.eu/rest/v2/name/${sName}
+function niewiemno(sName){
+        
+    request(`https://restcountries.eu/rest/v2/name/${encodeURI(sName)}`, (err, res, body) => {
+        
+        let oKraj = JSON.parse(body);
+        console.log(`restcountries-> nazwa kraju: ${oKraj[0].name}, domena: ${oKraj[0].topLevelDomain}, stolica: ${oKraj[0].capital}`);
+});
+}
+
+
+
+
 function CosTamAPI(){
     //https://dog-facts-api.herokuapp.com/api/v1/resources/dogs/all
 
@@ -68,11 +81,12 @@ function CosTamAPI(){
 
 //OpenWeatherMap("Katowice")
 
-//OpenWeatherMap("Szczecin")
+//OpenWeatherMap("Bielsko-Biała")
 
+niewiemno("Iceland")
 
-DifferentDogdFactsAPI();
-BoredAPI()
+//DifferentDogdFactsAPI();
+//BoredAPI()
 
 // https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/${cityID}?apikey=${accuAPIID}&language=pl&metric=true
 // console.log(`AccuWeather-> temp:${o1hForecast[0].Temperature.Value}°${o1hForecast[0].Temperature.Unit}, link: ${o1hForecast[0].MobileLink}`);

@@ -2,6 +2,27 @@ const https = require('https');
 const http = require('http');
 const request = require('request');
 
+const Reddit = require("@cxllm/reddit");
+const MEME_SUBREDDITS = ["dankmemes", "wholesomememes"];
+const kaomoji = [
+    '(*^ω^)',
+    '(◕‿◕✿)',
+    '(◕ᴥ◕)',
+    'ʕ•ᴥ•ʔ',
+    'ʕ￫ᴥ￩ʔ',
+    '(*^.^*)',
+    'owo',
+    'OwO',
+    '(｡♥‿♥｡)',
+    'uwu',
+    'UwU',
+    '(*￣з￣)',
+    '>w<',
+    '^w^',
+    '(つ✧ω✧)つ',
+    '(/ =ω=)/',
+];
+//npm i node-fetch
 const fetch = require('node-fetch');
 
 let OWMAPPID = "dea49c5dbe5ecf2f3b3d6ed074766ee2";
@@ -110,6 +131,33 @@ function GoogleTranslate(sTekst, sSourceLang, sTargetLang){
     })
 }
 
+let redditMeme = async () => {
+    let random = await MEME_SUBREDDITS[
+        Math.floor(Math.random() * MEME_SUBREDDITS.length)
+    ];
+    
+    let meme = await Reddit.top(random)
+    
+    while(meme.nsfw) meme = await Reddit.top(random);
+
+    console.log(`Autor: ${meme.author}\n${meme.title}\n${meme.image}\n${meme.url}\n${meme.upvotes} 👍, ${meme.downvotes} 👎}`)
+};
+
+let owoify = (str) => {
+    str = str.replace(/(?:l|r)/g, 'w');
+    str = str.replace(/(?:L|R)/g, 'W');
+    str = str.replace(/n([aeiou])/g, 'ny$1');
+    str = str.replace(/N([aeiou])|N([AEIOU])/g, 'Ny$1');
+    str = str.replace(/ove/g, 'uv');
+    str = str.replace(/nd(?= |$)/g, 'ndo');
+    str = str.replace(
+        /!+/g,
+        ` ${kaomoji[Math.floor(Math.random() * kaomoji.length)]}`
+    );
+
+    return str;
+}
+
 console.log('===królik===')
 randomBunny();
 console.log('===wiki===')
@@ -118,6 +166,10 @@ console.log('===nasa===')
 earth();
 console.log('===ip===')
 IP();
+console.log('===reddit===')
+redditMeme();
+console.log('===owoify===')
+owoify('Hello World!');
 
 
 
