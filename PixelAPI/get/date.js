@@ -1,3 +1,16 @@
+/*
+  ___ _   _ _____ ___  
+ |_ _| \ | |  ___/ _ \ 
+  | ||  \| | |_ | | | |
+  | || |\  |  _|| |_| |
+ |___|_| \_|_|   \___/
+
+To żądanie zwraca datę w strefie czasowej GMT+0 (UTC)
+
+Przykładowy wynik
+ {"ok":true,"dayOfWeek":6,"day":24,"month":4,"year":2021}
+*/
+
 exports.path = "/date";
 
 exports.execute = (req, res) => {

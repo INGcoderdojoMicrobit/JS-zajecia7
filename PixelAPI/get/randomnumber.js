@@ -1,3 +1,20 @@
+/*
+  ___ _   _ _____ ___  
+ |_ _| \ | |  ___/ _ \ 
+  | ||  \| | |_ | | | |
+  | || |\  |  _|| |_| |
+ |___|_| \_|_|   \___/
+
+To żądanie losuje numer
+
+Parametry
+ min (wymagane) - minimalna liczba
+ max (wymagane) - maksymalna liczba
+
+Przykładowy wynik
+ {"ok":true,"result":37524}
+*/
+
 exports.path = "/randomnumber";
 
 exports.execute = (req, res) => {

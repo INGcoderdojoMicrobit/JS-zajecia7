@@ -1,3 +1,16 @@
+/*
+  ___ _   _ _____ ___  
+ |_ _| \ | |  ___/ _ \ 
+  | ||  \| | |_ | | | |
+  | || |\  |  _|| |_| |
+ |___|_| \_|_|   \___/
+
+To żądanie wysyła zdjęcie Ziemii z satelity NASA
+
+Przykładowy wynik
+ {"ok":true,"image":{"png":"https://epic.gsfc.nasa.gov/archive/natural/2021/04/22/png/epic_1b_20210422162050.png"},"caption":"This image was taken by NASA's EPIC camera onboard the NOAA DSCOVR spacecraft","date":"2021-04-22 16:16:02"}
+*/
+
 const { NASA_API_KEY } = require("../config.json");
 const fetch = require('node-fetch')
 

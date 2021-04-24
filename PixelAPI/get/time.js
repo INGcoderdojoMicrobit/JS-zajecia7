@@ -1,3 +1,19 @@
+/*
+  ___ _   _ _____ ___  
+ |_ _| \ | |  ___/ _ \ 
+  | ||  \| | |_ | | | |
+  | || |\  |  _|| |_| |
+ |___|_| \_|_|   \___/
+
+To żądanie zwraca czas w podanej strefie czasowej
+
+Parametry
+ gmt (opcjonalnie, domyślnie 0) - Strefa czasowa w formacie GMT
+
+Przykładowy wynik
+ {"ok":true,"time":"13:17:43","hours":13,"minutes":17,"seconds":43,"miliseconds":372}
+*/
+
 exports.path = "/time";
 
 exports.execute = (req, res) => {

@@ -1,5 +1,5 @@
 exports.path = "/";
 
 exports.execute = (req, res) => {
-res.send({ok: true})
+    res.send({ok: true})
 };

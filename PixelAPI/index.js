@@ -62,7 +62,7 @@ app.use(limiter);
 
 app.listen(port, () => {
     console.log(
-        `🚀Słucham na porcie: ${port}
-        Klucz API: ${klucz}`
+`🚀 Słucham na porcie: ${port}
+Klucz API: ${klucz}`
     );
 });
