@@ -1,0 +1,5 @@
+{
+    "port": "3000",
+    "NASA_API_KEY": "DEMO_KEY",
+    "klucz": "SUPER_DUPER_SECRET_API_TOKEN"
+}
