@@ -14,6 +14,35 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+
+//funkcja zwraca string z datą i godziną lokalną
+function reportdate()
+{
+  let date_ob = new Date();
+
+  // current date
+  // adjust 0 before single digit date
+  let date = ("0" + date_ob.getDate()).slice(-2);
+
+  // current month
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+  // current year
+  let year = date_ob.getFullYear();
+
+  // current hours
+  let hours = ("0" + (date_ob.getHours() + 1)).slice(-2);
+
+  // current minutes
+  let minutes = ("0" + (date_ob.getMinutes() + 1)).slice(-2);
+
+  // current seconds
+  let seconds = ("0" + (date_ob.getSeconds() + 1)).slice(-2);
+
+  return `${year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds}`; 
+
+}
+
 //ładujemy wszystkie zapytania GET
 (async () => {
     for (let file of fs.readdirSync(`./get`)) {
@@ -26,6 +55,7 @@ app.use(limiter);
                 //sprawdzamy, czy mamy klucz API
                 if (!req.query.key) return res.status(403).send({ ok: false, message: "Podaj klucz API w parametrze key" });
                 if (req.query.key != klucz) return res.status(403).send({ ok: false, message: "Nieprawidłowy klucz" });
+                console.log(`/${path} -> ${reportdate()}`)
                 //uruchamiamy skrypt
                 require(path).execute(req, res);
             });
@@ -47,6 +77,7 @@ app.use(limiter);
                 //sprawdzamy, czy mamy klucz API
                 if (!req.query.key) return res.status(403).send({ ok: false, message: "Podaj klucz API w parametrze key" });
                 if (req.query.key != klucz) return res.status(403).send({ ok: false, message: "Nieprawidłowy klucz" });
+                console.log(`/${path} -> ${reportdate()}`)
                 //uruchamiamy skrypt
                 require(path).execute(req, res)
                 //jeśli wyrzuciliśmy błąd dopiero podczas zapytania
