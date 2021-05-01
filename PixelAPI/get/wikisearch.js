@@ -19,7 +19,7 @@ const request = require('request');
 exports.path = "/wikisearch";
 
 exports.execute = (req, resp) => {
-    if (!req.query.q) return res.send({ok: false, message: 'Podaj parametr q'});
+    if (!req.query.q) return resp.send({ok: false, message: 'Podaj parametr q'});
     request(`https://en.wikipedia.org/w/api.php?action=opensearch&search=${encodeURI(req.query.q)}&limit=${req.query.limit || 10}`, (err, res, body) => {
         if (err) throw err;
         let json = JSON.parse(body);

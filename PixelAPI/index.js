@@ -8,7 +8,7 @@ const fs = require('fs');
 //ograniczamy liczbę żądań z jednego IP do 15 na minutę
 const limiter = rateLimit({
     windowMs: 60*1000,
-    max: 15,
+    max: 55,
     message: {ok: false, message: 'You are being rate limited'},
     headers: true
 });
@@ -45,7 +45,8 @@ function reportdate()
 
 //ładujemy wszystkie zapytania GET
 (async () => {
-    for (let file of fs.readdirSync(`./get`)) {
+    const files = await fs.readdirSync(`get`)
+    for (let file of files) {
         let path = `./get/${file}`;
         if (!file.endsWith('.js') || !(fs.lstatSync(path)).isFile()) {
             continue;
