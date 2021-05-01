@@ -45,7 +45,7 @@ function reportdate()
 
 //ładujemy wszystkie zapytania GET
 (async () => {
-    const files = await fs.readdirSync(`get`)
+    const files = await fs.readdirSync(`./get`)
     for (let file of files) {
         let path = `./get/${file}`;
         if (!file.endsWith('.js') || !(fs.lstatSync(path)).isFile()) {
