@@ -7,8 +7,10 @@
   "license": "UNLICENSED",
   "private": false,
   "dependencies": {
+    "child_process": "^1.0.2",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
+    "ffmpeg-static": "^4.3.0",
     "figlet": "^1.5.0",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",

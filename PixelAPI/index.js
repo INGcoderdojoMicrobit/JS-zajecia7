@@ -43,7 +43,11 @@ function reportdate()
 
 }
 
-//ładujemy wszystkie zapytania GET
+/*ładujemy wszystkie zapytania GET
+Skrypt z ładowania to przerobiony skrypt z Maks1116/PixelBot (prywatne repozytorium)
+Copyright (c) 2020 Aternos GmbH
+Copyright (c) 2020-2021 Maks1116
+*/
 (async () => {
     const files = await fs.readdirSync(`./get`)
     for (let file of files) {
@@ -66,7 +70,11 @@ function reportdate()
     }
 })();
 
-//ładujemy wszystkie zapytania POST
+/*ładujemy wszystkie zapytania POST
+Skrypt z ładowania to przerobiony skrypt z Maks1116/PixelBot (prywatne repozytorium)
+Copyright (c) 2020 Aternos GmbH
+Copyright (c) 2020-2021 Maks1116
+*/
 (async () => {
     for (let file of fs.readdirSync(`./post`)) {
         let path = `./post/${file}`;
