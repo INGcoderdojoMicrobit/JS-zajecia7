@@ -5,13 +5,13 @@
   | || |\  |  _|| |_| |
  |___|_| \_|_|   \___/
 
-Zwraca największy wspólny dzielnik liczb x i y 
+Zwraca najmniejsza wspólna wielokrotność liczb x i y 
 
 Przykładowy wynik
  {"ok":true,"time":"13:17:43","hours":13,"minutes":17,"seconds":43,"miliseconds":372}
 */
 //ecmascript
-let NWD = (x,y) => {
+/*let NWD = (x,y) => {
     let wyn=0;
     console.log(`x=${x} y=${y} =>`)
     if(x>y){
@@ -25,7 +25,7 @@ let NWD = (x,y) => {
         else {wyn = NWD(x,y); console.log(`NWD() wynik=${wyn}`); return wyn;}
     }
     else {console.log(`else wynik=${x}`); return x}
-}
+}*/
 
 let NWD2 = (x,y) => {
     console.log(`x=${x} y=${y} =>`)
@@ -45,31 +45,33 @@ let NWD2 = (x,y) => {
 
 
 
-exports.path = "/euklides";
+exports.path = "/nww";
 
 exports.execute = (req, res) => {
       
     
     let x = parseInt(req.query.x);
     let y = parseInt(req.query.y);
+    let z;
     if (!req.query.x)
         return res.send({ ok: false, message: "Podaj argument x" });
     if (!req.query.y)
         return res.send({ ok: false, message: "Podaj argument y" });
-    if (!req.query.rekur)
-        return res.send({ ok: false, message: "Podaj argument rekur" });
-
-    if (req.query.rekur =="true")
-        res.send({
-                ok: true,
-                najw_wsp_dzielnik: NWD(x,y),
-                x: x,
-                y: y
-        });
-    else    
+    //if (!req.query.rekur)
+        //return res.send({ ok: false, message: "Podaj argument rekur" });
+    z=x*y;
+    //if (req.query.rekur =="true")
+    //    res.send({
+    //            ok: true,
+    //            najw_wsp_dzielnik: NWD(x,y),
+    //            x: x,
+    //            y: y
+    //    });
+    //else    
         res.send({
         ok: true,
         najw_wsp_dzielnik: NWD2(x,y),
+        najmn_wsp_wielokrotnosc: z/NWD2(x,y),
         x: x,
         y: y
 });

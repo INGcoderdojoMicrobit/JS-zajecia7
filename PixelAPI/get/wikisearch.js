@@ -16,7 +16,7 @@ Przykładowy wynik
 */
 const request = require('request');
 
-exports.path = "/wikisearch";
+exports.path = "/wikipedia/search";
 
 exports.execute = (req, resp) => {
     if (!req.query.q) return resp.send({ok: false, message: 'Podaj parametr q'});

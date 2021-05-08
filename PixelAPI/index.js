@@ -1,3 +1,4 @@
+'use strict'; //nie chcemy undefined w kodzie
 const express = require("express");
 const app = express();
 const { port, klucz } = require("./config.json");
