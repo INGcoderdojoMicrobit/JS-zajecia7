@@ -16,24 +16,25 @@ const fetchLib = require('node-fetch');
 //http://localhost:3000/euklides?key=%3EKAJro848VMjRsa8Hpj7&x=393&y=123456&rekur=false
 //{"ok":true,"najw_wsp_dzielnik":3,"x":393,"y":123456}
 
-let fetch = (x, y) => {
-    let result;
-    /*request(`http://localhost:${port}/euklides?key=${encodeURI(klucz)}&x=${x}&y=${y}&rekur=false`, (err, res, body) => {
-        if (err) throw err;
-        body = JSON.parse(body); //body to wynik
-        console.log(body);
-        result = body.najw_wsp_dzielnik;
-    });*/
-    //let res = JSON.parse(fetchLib (`http://localhost:${port}/euklides?key=${encodeURI(klucz)}&x=${x}&y=${y}&rekur=false`));
-    //result = res.najw_wsp_dzielnik;
-    fetchLib (`http://localhost:${port}/euklides?key=${encodeURI(klucz)}&x=${x}&y=${y}&rekur=false`).then(res => res.json())
-    .then((out) => {
-        console.log(out);
-        result = out.najw_wsp_dzielnik;
-        return result;
+function fetch(x, y) {
+    return new Promise(function (resolve, reject) {
+        let result;
+        request(`http://localhost:${port}/euklides?key=${encodeURI(klucz)}&x=${x}&y=${y}&rekur=false`, (err, res, body) => {
+            if (err) 
+            {
+                reject(err);
+            }
+            else 
+            {
+                console.log(`body=${body}`);
+                body = JSON.parse(body); //body to wynik
+                console.log(`bodyJSON=${body}`);
+                result = body.najw_wsp_dzielnik;
+                console.log(`result=${result}`);
+                resolve(result);
+            }
+        });
     });
-    console.log(result);
-    return result;
 }
 
 
@@ -55,7 +56,7 @@ let NWD2 = (x,y) => {
 
 exports.path = "/nww2";
 
-exports.execute = (req, res) => {
+exports.execute = async function (req, res) {
       
     
     let x = parseInt(req.query.x);
@@ -76,7 +77,7 @@ exports.execute = (req, res) => {
     //            y: y
     //    });
     //else    
-let zmienna = fetch (x, y)
+let zmienna = await fetch (x, y)
         res.send({
         ok: true,
         najw_wsp_dzielnik: NWD2(x,y),
