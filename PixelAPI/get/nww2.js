@@ -5,33 +5,31 @@
   | || |\  |  _|| |_| |
  |___|_| \_|_|   \___/
 
-Zwraca najmniejsza wspólna wielokrotność liczb x i y 
+Zwraca najmniejsza wspólna wielokrotność liczb x i y przy pomocy wołania API zwracającego NWD
 
 */
 
 const {port, klucz} = require('../config.json');
 const request = require('request');
-const fetchLib = require('node-fetch');
 
-//http://localhost:3000/euklides?key=%3EKAJro848VMjRsa8Hpj7&x=393&y=123456&rekur=false
-//{"ok":true,"najw_wsp_dzielnik":3,"x":393,"y":123456}
 
 function fetch(x, y) {
     return new Promise(function (resolve, reject) {
         let result;
+        //wywołujemy API
         request(`http://localhost:${port}/euklides?key=${encodeURI(klucz)}&x=${x}&y=${y}&rekur=false`, (err, res, body) => {
             if (err) 
             {
-                reject(err);
+                reject(err); //jeśli jest błąd - musimy wywołać funkcję "reject"
             }
             else 
             {
                 console.log(`body=${body}`);
-                body = JSON.parse(body); //body to wynik
-                console.log(`bodyJSON=${body}`);
-                result = body.najw_wsp_dzielnik;
+                body = JSON.parse(body); //w body zawarty jest string zwrócony przez wywoływane API 
+                console.log(`bodyJSON=${body}`); // zaminiamy go na obiekt (parsujemy JSON)
+                result = body.najw_wsp_dzielnik; // pobieramy odpowiednią interesującą nas wartość
                 console.log(`result=${result}`);
-                resolve(result);
+                resolve(result); // aby zwrócić poprawnie wynik zamiast return stosujemy funkcję "resolve"
             }
         });
     });
@@ -68,20 +66,14 @@ exports.execute = async function (req, res) {
         return res.send({ ok: false, message: "Podaj argument y" });
     //if (!req.query.rekur)
         //return res.send({ ok: false, message: "Podaj argument rekur" });
+
     z = x * y;
-    //if (req.query.rekur =="true")
-    //    res.send({
-    //            ok: true,
-    //            najw_wsp_dzielnik: NWD(x,y),
-    //            x: x,
-    //            y: y
-    //    });
-    //else    
-let zmienna = await fetch (x, y)
-        res.send({
-        ok: true,
-        najw_wsp_dzielnik: NWD2(x,y),
-        najmn_wsp_wielokrotnosc: z/NWD2(x,y),
-        najmn_wsp_wielokrotnosc_z_API: z / zmienna,
-});
+    let zmienna = await fetch (x, y) //tutaj stosujemy "await" - który pozwala nam zaczekać aż się skończy działanie funkcji fetch
+
+    res.send({
+            ok: true,
+            najw_wsp_dzielnik: NWD2(x,y),
+            najmn_wsp_wielokrotnosc: z/NWD2(x,y),
+            najmn_wsp_wielokrotnosc_z_API: z / zmienna,
+    });
 };
