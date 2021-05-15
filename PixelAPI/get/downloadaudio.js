@@ -7,13 +7,13 @@ exports.execute = (req, res) => {
 	if(!ytdl.validateURL(url)) {
         return res.sendStatus(400).send({ok: false, message: 'Nieprawidłowy url'});
     }
-    let title = 'video';
 
     ytdl.getInfo(url).then(info => {
-        title = info.videoDetails.title.replace(/[^\x00-\x7F]/g, "");
+        let title = 'video';
+        title = info.videoDetails.title;
+        res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
     });
 
-    res.header('Content-Disposition', `attachment; filename="${title}.mp3"`);
 	ytdl(url, {
 		format: 'mp3',
 		filter: 'audioonly',

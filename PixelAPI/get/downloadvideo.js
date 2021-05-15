@@ -11,13 +11,13 @@ exports.execute = (req, res) => {
     if(!ytdl.validateURL(url)) {
         return res.sendStatus(400).send({ok: false, message: 'Nieprawidłowy url'});
     }
-    let title = 'video';
 
     ytdl.getInfo(url).then(info => {
-        title = info.videoDetails.title.replace(/[^\x00-\x7F]/g, "");
+        let title = 'video';
+        title = info.videoDetails.title;
+        res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
     });
 
-    res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
     let name = `${Date.now().toString()}-${Math.random()}`;
 
     const ref = url;
@@ -48,7 +48,7 @@ exports.execute = (req, res) => {
     ],
     });
     ffmpegProcess.on('close', () => {
-        res.send(fs.createReadStream(`./${name}.mp4`));
+        res.send(fs.readFileSync(`./${name}.mp4`));
     });
 
     ffmpegProcess.stdio[3].on('data', chunk => {
