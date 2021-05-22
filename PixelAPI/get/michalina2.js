@@ -47,13 +47,19 @@ function fetch(sCity) {
 
         request(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(sCity)}&appid=${OWMAPPID}&lang=pl&units=metric`, (err, res, body) => {
             
-            if (err) 
+            if (err || res.statusCode === 404)
             {
+                console.log(`err=${err}`); //w body zawarty jest string zwrócony przez wywoływane API 
+                console.log(`body=${body}`); //w body zawarty jest string zwrócony przez wywoływane API 
+                if (res.statusCode === 404) err = body;
                 reject(err); //jeśli jest błąd - musimy wywołać funkcję "reject"
             }
             else 
             {
                 console.log(`body=${body}`); //w body zawarty jest string zwrócony przez wywoływane API 
+                console.log(`res=${res}`); //w body zawarty jest string zwrócony przez wywoływane API 
+                console.log(`err=${err}`); //w body zawarty jest string zwrócony przez wywoływane API 
+                
                 let oPogoda = JSON.parse(body); // zaminiamy go na obiekt (parsujemy JSON)
                 console.log(`bodyJSON=${oPogoda}`); 
                 
@@ -80,8 +86,20 @@ exports.execute = async function (req, res) {
     if (!req.query.city)
         return res.send({ ok: false, message: "Podaj argument city - miasto w ktorym badamy temperature" });
     
-    let temp = await fetch (city) //tutaj stosujemy "await" - który pozwala nam zaczekać aż się skończy działanie funkcji fetch
-
+    let temp;
+    try 
+    {
+        temp = await fetch (city) //tutaj stosujemy "await" - który pozwala nam zaczekać aż się skończy działanie funkcji fetch
+    } catch(err) 
+    {
+        // catches errors both in fetch and response.json
+        res.send({
+            ok: false,
+            error: err
+        });
+        return 0;
+    }
+      
     res.send({
             ok: true,
             miasto: city,
