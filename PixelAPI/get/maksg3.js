@@ -38,7 +38,7 @@ function fetch(iYear, iMonth, iDay) {
                     let sNazwa = ""
     
                     oSwieta.forEach(element => {
-                        console.log(`swieta-> data:${element.date} localna nazwa:${element.localName}, angielska nazwa:${element.name}`);    
+                        console.log(`swieta-> data:${element.date} lokalna nazwa:${element.localName}, angielska nazwa:${element.name}`);    
                         //"date":"2021-01-01"
                         console.log(`swieta-> rok: ${parseInt(element.date.substring(0,4))}, mies: ${parseInt(element.date.substring(5,7))}, dzien: ${parseInt(element.date.substring(8,10))}`)
                         if (iYear==parseInt(element.date.substring(0,4)) && iMonth == parseInt(element.date.substring(5,7)) && iDay == parseInt(element.date.substring(8,10)))
