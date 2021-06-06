@@ -33,6 +33,7 @@ client.on('message', message => {
     }
 });*/
 
+//P R O S T Y handler komend
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 

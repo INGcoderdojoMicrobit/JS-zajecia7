@@ -10,6 +10,7 @@ module.exports = {
 
         message.channel.awaitMessages(m => (m.author.id === message.author.id), { max: 1, time: 30000, errors: ['time'] })
 		.then(collected => {
+            if (parseInt(collected.first().content) == NaN) return message.channel.send('Nie wydaje mi się, żeby to była liczba')
 			if (parseInt(collected.first().content) == liczba) {
                 message.channel.send('Udało ci się!');
             }
